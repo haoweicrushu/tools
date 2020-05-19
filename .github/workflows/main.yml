@@ -8,14 +8,14 @@ jobs:
     name: Build and deploy gh-pages
     env:
       MY_SECRET: ${{secrets.page_token}}
-      USER_NAME: githubaction
-      USER_EMAIL: githubaction@fake.com
+      USER_NAME: haoweicrushu_github_action
+      USER_EMAIL: haoweicrushu@gmail.com
       PUBLISH_DIR: ./build
       VERSION: 0.1.0
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [12.x]
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
