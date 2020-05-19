@@ -1,28 +1,3 @@
-const a = `{"menu": {
-    "header": "SVG Viewer",
-    "items": [
-        {"id": "Open"},
-        {"id": "OpenNew", "label": "Open New"},
-        {"id": "ZoomIn", "label": "Zoom In"},
-        {"id": "ZoomOut", "label": "Zoom Out"},
-        {"id": "OriginalView", "label": "Original View"},
-        {"id": "Quality"},
-        {"id": "Pause"},
-        {"id": "Mute"},
-        {"id": "Find", "label": "Find..."},
-        {"id": "FindAgain", "label": "Find Again"},
-        {"id": "Copy"},
-        {"id": "CopyAgain", "label": "Copy Again"},
-        {"id": "CopySVG", "label": "Copy SVG"},
-        {"id": "ViewSVG", "label": "View SVG"},
-        {"id": "ViewSource", "label": "View Source"},
-        {"id": "SaveAs", "label": "Save As"},
-        {"id": "Help"},
-        null,
-        {"id": "About", "label": "About Adobe CVG Viewer..."}
-    ]
-}}`;
-
 function getTypeOfValue(value) {
   let currentType = Object.prototype.toString.call(value).split(' ')[1].slice(0, -1).toLowerCase();
 
@@ -49,7 +24,7 @@ function getMaxKeyChild(arr = []) {
   return index;
 }
 
-function r(json, parentKey = [], commentType = 'apiSuccess') {
+export function convert(json, parentKey = [], commentType = 'apiSuccess') {
   let obj = json;
   let str = '';
   if (getTypeOfValue(json) === 'String') {
@@ -62,13 +37,14 @@ function r(json, parentKey = [], commentType = 'apiSuccess') {
       if (obj[key].length) {
         str += `* @${commentType} {${getTypeOfValue(obj[key][0])}[]} ${getPathType(parentKey)}${key} \n`;
         const maxKeyChild = getMaxKeyChild(obj[key]);
-        if (getTypeOfValue(obj[key][0]) === 'Object') return (str += r(obj[key][maxKeyChild], [...parentKey, key]));
+        if (getTypeOfValue(obj[key][0]) === 'Object')
+          return (str += convert(obj[key][maxKeyChild], [...parentKey, key]));
       }
     }
 
     if (type === 'Object') {
       str += `* @${commentType} {${type}} ${getPathType(parentKey)}${key} \n`;
-      return (str += r(obj[key], [...parentKey, key]));
+      return (str += convert(obj[key], [...parentKey, key]));
     }
 
     str += `* @${commentType} {${type}} ${getPathType(parentKey)}${key} \n`;
@@ -76,5 +52,3 @@ function r(json, parentKey = [], commentType = 'apiSuccess') {
 
   return str;
 }
-
-console.log(r(a));
