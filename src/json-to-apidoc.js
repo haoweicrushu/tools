@@ -35,6 +35,7 @@ export function convert(json, parentKey = [], commentType = 'apiSuccess') {
     const type = getTypeOfValue(obj[key]);
     if (type === 'Array') {
       if (obj[key].length) {
+        console.log(getTypeOfValue(obj[key][0]));
         str += `* @${commentType} {${getTypeOfValue(obj[key][0])}[]} ${getPathType(parentKey)}${key} \n`;
         const maxKeyChild = getMaxKeyChild(obj[key]);
         if (getTypeOfValue(obj[key][0]) === 'Object')
@@ -47,7 +48,7 @@ export function convert(json, parentKey = [], commentType = 'apiSuccess') {
       return (str += convert(obj[key], [...parentKey, key]));
     }
 
-    str += `* @${commentType} {${type}} ${getPathType(parentKey)}${key} \n`;
+    if (type !== 'Array') str += `* @${commentType} {${type}} ${getPathType(parentKey)}${key} \n`;
   });
 
   return str;
