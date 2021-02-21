@@ -41,7 +41,7 @@ function App() {
 }
 
 const Riddle = () => {
-	const [riddles, setRiddles] = useState<String[]>(riddleTxt.split('\n'));
+	const [riddles] = useState<String[]>(riddleTxt.split('\n'));
 	const [filterRiddles, setFilterRiddles] = useState<String[]>([]);
 	const filter = (e: React.FormEvent<HTMLInputElement>) => {
 		const val = e.currentTarget.value;
