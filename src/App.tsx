@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styles/App.sass';
 import { convert } from './json-to-apidoc';
-import riddleTxt from './riddle';
+import { riddleTxt } from './riddle';
 
 function App() {
 	const [text, setText] = useState('');
