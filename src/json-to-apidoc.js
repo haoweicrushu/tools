@@ -1,3 +1,4 @@
+const m = require('./map');
 function getTypeOfValue(value) {
   let currentType = Object.prototype.toString.call(value).split(' ')[1].slice(0, -1).toLowerCase();
 
@@ -31,7 +32,7 @@ export function convert(json, parentKey = [], commentType = 'apiSuccess') {
     obj = JSON.parse(json);
   }
 
-  Object.keys(obj).forEach((key) => {
+  Object.keys(obj).forEach(key => {
     const type = getTypeOfValue(obj[key]);
     if (type === 'Array') {
       if (obj[key].length) {
@@ -48,7 +49,12 @@ export function convert(json, parentKey = [], commentType = 'apiSuccess') {
       return (str += convert(obj[key], [...parentKey, key]));
     }
 
-    if (type !== 'Array') str += `* @${commentType} {${type}} ${getPathType(parentKey)}${key} \n`;
+    const name = m[key] || null;
+    if (name) {
+      if (type !== 'Array') str += `* @${commentType} {${type}} ${getPathType(parentKey)}${key} ${name}\n`;
+    } else {
+      if (type !== 'Array') str += `* @${commentType} {${type}} ${getPathType(parentKey)}${key} \n`;
+    }
   });
 
   return str;

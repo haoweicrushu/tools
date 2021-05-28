@@ -1,0 +1,33 @@
+module.exports = {
+  method_id: '支付方式id',
+  payment_method_id: '支付方式id',
+  result: '回傳結果',
+  ret: '回傳資料',
+  vendor_id: '廠商id',
+  user_id: '使用者id',
+  type_id: '支付類別id',
+  sort: '排序欄位',
+  order: '升冪或降冪。可設定 asc 或 desc',
+  first_result: '分頁從第幾筆開始',
+  max_results: '分頁顯示筆數',
+  pagination: '分頁',
+  ip: 'ip',
+  memo: '備註',
+  vendor_user_level_id: '廠商使用者等級id',
+  vendor_vip_level_id: '廠商VIP等級id',
+  created_at: '建立時間，ISO-8601',
+  modified_at: '修改時間，ISO-8601',
+  username: '使用者名稱',
+  crypto_rate: '加密貨幣訂單匯率',
+  crypto_real_rate: '加密貨幣實際訂單匯率',
+  crypto_num: '加密貨幣入款數量',
+  crypto_real_num: '加密貨幣入款實際數量',
+  crypto_transaction_fee: '加密貨幣交易費',
+  crypto_txn_hash: '加密貨幣交易訂單號',
+  block_at: '封鎖時間，ISO-8601',
+
+  auto_unlock_at: '自動解鎖時間，ISO-8601',
+
+  operator_id: '操作者id',
+  lower_limit:'最低入款下限(CNY)'
+};
